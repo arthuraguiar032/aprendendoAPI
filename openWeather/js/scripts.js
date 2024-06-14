@@ -14,6 +14,8 @@ const windResponse = document.getElementById('wind').getElementsByTagName('span'
 
 const weatherIconResponse = document.getElementById('weather-icon'); 
 
+const weatherDataContainer = document.getElementById('weather-data');
+
 //Funcoes
 async function getWeatherData(city){
 
@@ -45,6 +47,8 @@ async function showWeatherData(city){
     windResponse.innerText = `${data.wind.speed} Km/h`;
 
     weatherIconResponse.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+
+    weatherDataContainer.classList.remove('hide');
 }
 
 //Eventos
@@ -54,4 +58,12 @@ searchButton.addEventListener('click', (info) => {
     let input = cityInput.value;
     
     showWeatherData(input);
+});
+
+cityInput.addEventListener('keypress', (info) => {
+    if(info.key === 'Enter'){
+        let input = cityInput.value;
+    
+        showWeatherData(input);
+    }
 });
