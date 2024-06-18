@@ -1,5 +1,6 @@
 //API_KEY
 const apiKey_openWeather = 'db5779e6e8b5fc1a68a7dd07232f890d';
+const apiKey_unsplash = 'djPGuYaxlqIR0mh5a9PBEbONxJ9jLiWzniuD3sjVXCo';
 
 //Elementos
 const cityInput = document.getElementById('city-input');
@@ -15,6 +16,8 @@ const windResponse = document.getElementById('wind').getElementsByTagName('span'
 const weatherIconResponse = document.getElementById('weather-icon'); 
 
 const weatherDataContainer = document.getElementById('weather-data');
+
+const $body = document.querySelector('body');
 
 //Funcoes
 async function getWeatherData(city){
@@ -51,19 +54,41 @@ async function showWeatherData(city){
     weatherDataContainer.classList.remove('hide');
 }
 
+//TODO
+async function getCityImage(city){
+    const apiCityImageURL = `https://api.unsplash.com/photos/random?client_id=${apiKey_unsplash}&query=${city}&orientation=landscape`;
+
+    let res = await fetch(apiCityImageURL);
+    let data = await res.json();
+
+    console.log(data);
+    return data;
+}
+
+async function showCityImage(city){
+    let data = await getCityImage(city)
+
+    $body.style.backgroundImage = `url(${data['urls']['full']})`;
+}
+
+function showInfo(city){
+    weatherDataContainer.classList.add('hide');
+    $body.style.backgroundImage = 'none';
+    
+    showWeatherData(city);
+    showCityImage(city);
+}
+
 //Eventos
 searchButton.addEventListener('click', (info) => {
     info.preventDefault();
-
     let input = cityInput.value;
-    
-    showWeatherData(input);
+    showInfo(input);
 });
 
 cityInput.addEventListener('keypress', (info) => {
     if(info.key === 'Enter'){
         let input = cityInput.value;
-    
-        showWeatherData(input);
+        showInfo(input);
     }
 });
