@@ -1,6 +1,6 @@
 //API_KEY
-const apiKey_openWeather = env.APIKEY_OPENWEATHER;
-const apiKey_unsplash = env.APIKEY_UNPLASH;
+const apiKey_openWeather = APIKEY_OPENWEATHER;
+const apiKey_unsplash = APIKEY_UNPLASH;
 
 //Elementos
 const cityInput = document.getElementById('city-input');
