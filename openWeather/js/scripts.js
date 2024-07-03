@@ -1,5 +1,5 @@
 //API_KEY
-const apiKey_openWeather = APIKEY_OPENWEATHER;
+vconst apiKey_openWeather = env.APIKEY_OPENWEATHER;
 const apiKey_unsplash = 'djPGuYaxlqIR0mh5a9PBEbONxJ9jLiWzniuD3sjVXCo';
 
 //Elementos
