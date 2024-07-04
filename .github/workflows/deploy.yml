@@ -1,0 +1,29 @@
+# .github/workflows/deploy.yml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Create config.js
+      run: |
+        mkdir -p ./public
+        echo "const config = {" > ./public/config.js
+        echo "  apiKey1: '${{ secrets.APIKEY_OPENWEATHER }}'," >> ./public/config.js
+        echo "  apiKey2: '${{ secrets.APIKEY_UNPLASH }}'" >> ./public/config.js
+        echo "};" >> ./public/config.js
+        echo "export default config;" >> ./public/config.js
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
