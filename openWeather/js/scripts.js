@@ -1,6 +1,8 @@
+import config from '../../public/config.js';
+
 //API_KEY
-const apiKey_openWeather = secrets.APIKEY_OPENWEATHER;
-const apiKey_unsplash = secrets.APIKEY_UNPLASH;
+const apiKey_openWeather = config.apiKey1;
+const apiKey_unsplash = config.apiKey2;
 
 //Elementos
 const cityInput = document.getElementById('city-input');
